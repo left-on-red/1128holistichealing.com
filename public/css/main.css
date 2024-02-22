@@ -1,0 +1,135 @@
+:root {
+    --accent: #437C90;
+    --accent-dark: #3a697a;
+    --accent-darker: #305664;
+    --light: #EEEBD3;
+    --dark: #181D27;
+    --bs-border-color: #00000020;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    --bs-navbar-color: var(--background-color);
+    --bs-navbar-hover-color: var(--dark);
+    --bs-navbar-active-color: var(--dark);
+    --bs-navbar-nav-link-padding-x: 1rem;
+    border-bottom: 5px solid var(--dark);
+}
+
+.dropdown-menu {
+    --bs-dropdown-bg: var(--primary-color);
+    --bs-dropdown-link-color: var(--light);
+    --bs-dropdown-link-hover-color: var(--dark);
+    --bs-dropdown-link-hover-bg: #ffffff11;
+    --bs-dropdown-link-active-color: var(--background-color);
+    --bs-dropdown-link-active-bg: #ffffff11;
+}
+
+.nav-link, .dropdown-item {
+    text-transform: uppercase;
+    font-weight: 1000;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.nav-link:hover, .dropdown-item:hover {
+    text-decoration: none;
+}
+
+.list-group {
+    --bs-list-group-color: var(--dark);
+    --bs-list-group-bg: var(--background-color);
+    --bs-list-group-border-color: #00000050;
+}
+
+.banner {
+    height: 25vh;
+    min-height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 5px solid var(--primary-color);
+    background-color: #fff;
+}
+
+.thai-massage-img {
+    background-image: linear-gradient(to right, #ffffff80, 30%, #fff), url('https://www.health.com/thmb/XwSLq9__b0ANDbCqdb2kGAVdXLw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1438172458-fc10c26db84048b99a3feaa316701fa3.jpg');
+}
+
+.bemer-therapy-img {
+    background-image: linear-gradient(to right, #ffffff80, 50%, #fff), url('https://images.squarespace-cdn.com/content/v1/61439ac3f55bc40567e7b0e6/2db072b6-8589-479a-80cb-ba9e271e9c4c/bemer.jpeg');
+}
+
+p {
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+h1, h2 {
+    color: var(--secondary-color);
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 0.5em;
+}
+
+.btn {
+    font-weight: 1000;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.btn-primary {
+    --bs-btn-color: var(--background-color);
+    --bs-btn-hover-color: var(--background-color);
+    --bs-btn-active-color: var(--background-color);
+
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-hover-bg: hsl(from var(--primary-color) h s calc(l - 5%));
+    --bs-btn-active-bg: hsl(from var(--primary-color) h s calc(l - 10%));
+
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-border-color: hsl(from var(--primary-color) h s calc(l - 5%));
+    --bs-btn-active-border-color: hsl(from var(--primary-color) h s calc(l - 5%));
+}
+
+.border {
+    --bs-border-color: var(--primary-color);
+}
+
+.blockquote {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+.blockquote-footer {
+    font-weight: bold;
+    text-align: right;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a i.bi {
+    color: #00000080;
+}
