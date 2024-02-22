@@ -95,7 +95,7 @@ export interface IService {
 function service(data: IService) {
     console.log(data);
     return `
-        <div class="banner" ${data.banner_image ? `style="background-image: linear-gradient(to right, #ffffff80, 30%, #fff), url('${data.banner_image?.data.attributes.url}');` : ''}">
+        <div class="banner" ${data.banner_image ? `style="background-image: linear-gradient(to right, #ffffff80, 30%, #fff), url('${data.banner_image?.data?.attributes?.url}');` : ''}">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                     <div class="col-12 text-center">
