@@ -81,6 +81,12 @@ app.get('/services/:slug', async (request, response) => {
     return response.sendStatus(404);
 });
 
+app.get('/appointments', async (request, response) => {
+    const services = await getServices();
+    const site = await getSite();
+    return response.send(render({ services, site }).appointments(site));
+});
+
 app.use((error: { status: number, message: string }, request: express.Request, response: express.Response, next: express.NextFunction) => {
     try {
         const status: number = error.status || 500;

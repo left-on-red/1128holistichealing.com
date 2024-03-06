@@ -1,3 +1,7 @@
+type PlainContent = {
+    plain_content: string;
+}
+
 interface IButton {
     label: string;
     color: string;
@@ -10,13 +14,13 @@ function button(data: IButton) {
 
 interface ICTA {
     button: IButton | null;
-    content: string | null;
+    content: PlainContent | null;
     __component: 'content.cta';
 }
 
 function cta(data: ICTA) {
     return `<div class="text-center">
-            ${data.content ?? ''}
+            ${data.content?.plain_content ?? ''}
             ${data.button !== null ? button(data.button) : ''}
         </div>`;
 }
@@ -93,7 +97,6 @@ export interface IService {
 }
 
 function service(data: IService) {
-    console.log(data);
     return `
         <div class="banner" ${data.banner_image ? `style="background-image: linear-gradient(to right, #ffffff80, 30%, #fff), url('${data.banner_image?.data?.attributes?.url}');` : ''}">
             <div class="container h-100">
@@ -135,30 +138,37 @@ export interface ISite {
     },
     color_primary: string;
     color_secondary: string;
-    color_accent: string;
     color_background: string;
     home_content: (IGridRow | IContent | ICTA | IButton)[];
+    calendly_url: string;
+    google_maps_url: string;
+    google_maps_embed: string;
+    address: string;
 }
 
 function homepage(data: ISite) {
     return `
-        <div class="container">
-            <div class="row mb-3">
-                <div class="col-12 text-center">
-                    <h1 class="w-100">1128 Holistic Healing</h1>
-                    <small class="w-100">NAET Practitioner • Licensed Massage Therapist • Authorized BEMER Distributor</small>
-                </div>
-                <div class="col-12 d-flex justify-content-center">
-                    <figure class="border rounded py-1 px-2 mt-2">
-                        <blockquote class="blockquote">Come unto me, all ye that labour and are heavy laden, and I will give you rest.</blockquote>
-                        <figcaption class="blockquote-footer">
-                            Matthew 11:28
-                        </figcaption>
-                    </figure>
+        <div class="homepage-banner">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 text-center">
+                        <h1>1128 Holistic Healing</h1>
+                        <small>NAET Practitioner • Licensed Massage Therapist • Authorized BEMER Distributor</small>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <figure class="py-1 px-2 mt-2">
+                            <blockquote class="blockquote">Come unto me, all ye that labour and are heavy laden, and I will give you rest.</blockquote>
+                            <figcaption class="blockquote-footer">
+                                Matthew 11:28
+                            </figcaption>
+                        </figure>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="container mt-2">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <figure class="figure">
@@ -168,14 +178,14 @@ function homepage(data: ISite) {
                         </div>
                         <div class="col-12 d-flex justify-content-center">
                             <ul class="list-unstyled border rounded w-100 px-1">
-                                <li><a><i class="bi bi-geo-alt-fill"></i> TBD</a></li>
+                                <li><a target="_blank" href="${data.google_maps_url}"><i class="bi bi-geo-alt-fill"></i> ${data.address}</a></li>
                                 <li><a href="tel:+1${data.bio_phonenumber.replace(/\D/g, '')}"><i class="bi bi-telephone-fill"></i> ${data.bio_phonenumber}</a></li>
                                 <li><a href="mailto:${data.bio_email}"><i class="bi bi-envelope-fill"></i> ${data.bio_email}</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 px-5">
+                <div class="col-lg-6 px-5">
                     <div class="container">
                         ${data.home_content.map(x => {
                             if (x.__component === 'layout.grid-row') {
@@ -216,7 +226,6 @@ export function render(context: IRenderContext) {
                         :root {
                             --primary-color: ${context.site.color_primary};
                             --secondary-color: ${context.site.color_secondary};
-                            --accent-color: ${context.site.color_accent};
                             --background-color: ${context.site.color_background};
                         }
                     </style>
@@ -275,6 +284,25 @@ export function render(context: IRenderContext) {
                 title: 'home page',
                 description: 'home page description',
                 content: homepage(data),
+            });
+        },
+        appointments(data: ISite) {
+            return wrap({
+                title: 'book an appointment',
+                description: 'book an appointment',
+                content: `
+                    <div class="container mt-5">
+                        <div class="row align-items-center">
+                            <div class="col-12 text-center">
+                                <h1>Book an Appointment</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="calendly-inline-widget" data-url="${data.calendly_url}" style="min-width:320px; height:700px;"></div>
+                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                        </div>
+                    </div>
+                `,
             });
         }
     }
