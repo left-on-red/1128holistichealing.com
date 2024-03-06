@@ -4,11 +4,15 @@ import path from 'path';
 import request from 'request';
 import express from 'express';
 import axios from 'axios';
+import https from 'https';
+import fs from 'fs';
 import { type IService, type ISite, render } from './render';
 
 const port = process.env.PORT ?? 3000;
 const token = process.env.API_TOKEN;
 const api_domain = process.env.API_DOMAIN;
+const private_key = process.env.PRIVATE_KEY;
+const certificate = process.env.CERTIFICATE;
 
 async function getSite() {
     const result: { data: { attributes: ISite } } = (await axios.get(`${api_domain}/api/site`, {
@@ -100,4 +104,11 @@ app.use((error: { status: number, message: string }, request: express.Request, r
     }
 });
 
-app.listen(port, () => console.log(`🚀 App listening on the port ${port}`));
+if (private_key && certificate) {
+    https.createServer({
+        key: fs.readFileSync(private_key),
+        cert: fs.readFileSync(certificate),
+    }, app).listen(port);
+} else {
+    app.listen(port);
+}
