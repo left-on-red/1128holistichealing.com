@@ -65,6 +65,7 @@ app.use('/content-manager', proxy(`${api_domain}/content-manager`));
 app.use('/content-type-builder', proxy(`${api_domain}/content-type-builder`));
 app.use('/i18n', proxy(`${api_domain}/i18n`));
 app.use('/uploads', proxy(`${api_domain}/uploads`));
+app.use('/upload', proxy(`${api_domain}/upload`));
 
 app.get('/', async (request, response) => {
     const services = await getServices();
